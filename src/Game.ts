@@ -1,7 +1,9 @@
 import Candle from "./Candle";
+import Schema from "./Schema";
 
 class Game {
 
+    schema: Schema[] = [];
     candles: Candle[] = [];
     stacks: {
         [key: string]: number,
@@ -13,7 +15,7 @@ class Game {
     nextCandles(data: string): void {
         const rates = data.split(";");
         for (const rate of rates) {
-            const [currencyPair, time, open, close, high, low, volume] = rate.split(",");
+            const [currencyPair, time, high, low, open, close, volume] = rate.split(",");
             this.candles.push({
                 open: parseFloat(open),
                 close: parseFloat(close),
@@ -23,6 +25,7 @@ class Game {
                 time: new Date(time),
                 volume: parseFloat(volume)
             })
+            Schema.addSchema(this.schema, this.candles.slice(-Schema.schemaSize));
         }
     }
 
@@ -47,6 +50,11 @@ class Game {
         if (!currencyPair) return this.candles;
         return this.candles.filter(candle => candle.currencyPair === currencyPair);
     }
+
+    getSchemas(): Schema[] {
+        return this.schema;
+    }
+
 }
 
 export default Game;
