@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "nodemonConfig": {
+    "ignore": ["**/*.js"]
+  },
   "scripts": {
     "start": "ts-node src/main.ts",
+    "build": "tsc src/main.ts",
+    "watch": "tsc src/main.ts --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   }

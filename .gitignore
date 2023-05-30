@@ -3,3 +3,4 @@ trade_*
 node_modules
 package-lock.json
 src/*.js
+src/Bonus
